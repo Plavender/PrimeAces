@@ -1,4 +1,4 @@
-package cst200.edu;
+
 
 import java.awt.Button;
 import java.awt.Color;
@@ -19,7 +19,7 @@ import javax.swing.JPanel;
  * Rather than reinvent the wheel, I kept the original GUI layout
  * and added code where it was needed produce the desired effect.
  * This version does not contain code as of yet to allow the user to
- * continue playing with thier accrued winnings (still in development)
+ * continue playing with their accrued winnings (still in development)
  *
  *@version 1.2
  */
