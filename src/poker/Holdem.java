@@ -1,4 +1,4 @@
-package cst200.edu;
+package poker;
 import java.awt.Button;
 import java.awt.Color;
 import java.awt.Container;
@@ -56,12 +56,13 @@ public class HoldEm extends JPanel implements ActionListener {
 	 */
 	private int compMon = 250, compMon2 = 250, compMon3 = 250;
 	
-	private String bet, h1, h2, a1, a2, hd1, hd2, ad1, ad2, c1, c2, c3, c4, c5,
-			cd1, cd2, cd3, cd4, cd5;
+	private String bet;
+	private Card  h1, h2, a1, a2, hd1, hd2, ad1, ad2, c1, c2, c3, c4, c5,
+	cd1, cd2, cd3, cd4, cd5;
 	/**
 	 * Added variables for multiplayer game
 	 */
-	private String a21, a22, a31, a32,ad21, ad22, ad31, ad32;
+	private Card a21, a22, a31, a32, ad21, ad22, ad31, ad32;
 	
 	private Suit hd1s, hd2s, ad1s, ad2s, cd1s, cd2s, cd3s, cd4s, cd5s;
 	/**
@@ -71,25 +72,25 @@ public class HoldEm extends JPanel implements ActionListener {
 	
 	private JFrame frame;
 	private Player human = new Player(0);
-	private Player computer = new Player(0);
+	private Computer computer = new Computer(0);
 	/**
 	 * New variables for multiplayer game.
 	 */
-	private Player computer2 = new Player(0);
-	private Player computer3 = new Player(0);
+	private Computer computer2 = new Computer(0);
+	private Computer computer3 = new Computer(0);
 	
 	public HoldEm() {
 
 		Deck playDeck = new Deck();
-		playDeck.makeDeck();
+//		playDeck.makeDeck();
 		pool = 0;
 		
 		//Original code for two player game
-		computer.addMoney(compMon);
-		human.addMoney(humanMon);
+		computer.addChips(compMon);
+		human.addChips(humanMon);
 		//Code added for multi player game
-		computer2.addMoney(compMon2);
-		computer3.addMoney(compMon3);
+		computer2.addChips(compMon2);
+		computer3.addChips(compMon3);
 		
 		/**
 		 * While loop used to control single game flow- this is an area
@@ -115,27 +116,27 @@ public class HoldEm extends JPanel implements ActionListener {
 			a31 = playDeck.getCard();
 			a32 = playDeck.getCard();
 
-			human.getCard(h1);
-			computer.getCard(a1);
+			human.addCard(h1);
+			computer.addCard(a1);
 			//added code for multiplayer game
-			computer2.getCard(a21);
-			computer3.getCard(a31);
+			computer2.addCard(a21);
+			computer3.addCard(a31);
 			
-			human.getCard(h2);
-			computer.getCard(a2);
+			human.addCard(h2);
+			computer.addCard(a2);
 			//added code for multiplayer game
-			computer2.getCard(a22);
-			computer3.getCard(a32);
+			computer2.addCard(a22);
+			computer3.addCard(a32);
 
-			hd1 = (h1.substring(1, 2));
-			hd2 = (h2.substring(1, 2));
-			ad1 = (a1.substring(1, 2));
-			ad2 = (a2.substring(1, 2));
-			//added code for multiplayer game
-			ad21 = (a21.substring(1, 2));
-			ad22 = (a22.substring(1, 2));
-			ad31 = (a31.substring(1, 2));
-			ad32 = (a32.substring(1, 2));
+//			hd1 = (h1.substring(1, 2));
+//			hd2 = (h2.substring(1, 2));
+//			ad1 = (a1.substring(1, 2));
+//			ad2 = (a2.substring(1, 2));
+//			//added code for multiplayer game
+//			ad21 = (a21.substring(1, 2));
+//			ad22 = (a22.substring(1, 2));
+//			ad31 = (a31.substring(1, 2));
+//			ad32 = (a32.substring(1, 2));
 
 			// getting and organizing play card data
 			c1 = playDeck.getCard();
@@ -151,30 +152,30 @@ public class HoldEm extends JPanel implements ActionListener {
 			playArea.addToPlay(c5);
 
 			// finding the value on the cards
-			cd1 = (c1.substring(1, 2));
-			cd2 = (c2.substring(1, 2));
-			cd3 = (c3.substring(1, 2));
-			cd4 = (c4.substring(1, 2));
-			cd5 = (c5.substring(1, 2));
+//			cd1 = (c1.substring(1, 2));
+//			cd2 = (c2.substring(1, 2));
+//			cd3 = (c3.substring(1, 2));
+//			cd4 = (c4.substring(1, 2));
+//			cd5 = (c5.substring(1, 2));
 
 			String[] ct = new String[15];
 
 			// getting rid of the ts
-			ct[0] = hd1;
-			ct[1] = hd2;
-			ct[2] = ad1;
-			ct[3] = ad2;
+//			ct[0] = hd1;
+//			ct[1] = hd2;
+//			ct[2] = ad1;
+//			ct[3] = ad2;
 			//added code for multiplayer game
-			ct[4] = ad21;
-			ct[5] = ad22;
-			ct[6] = ad31;
-			ct[7] = ad32;
+//			ct[4] = ad21;
+//			ct[5] = ad22;
+//			ct[6] = ad31;
+//			ct[7] = ad32;
 			//for the community cards
-			ct[8] = cd1;
-			ct[9] = cd2;
-			ct[10] = cd3;
-			ct[11] = cd4;
-			ct[12] = cd5;
+//			ct[8] = cd1;
+//			ct[9] = cd2;
+//			ct[10] = cd3;
+//			ct[11] = cd4;
+//			ct[12] = cd5;
 
 			//changed test from 9 to 15 to match array length
 			for (x = 0; x < 13; x++) {
@@ -183,21 +184,21 @@ public class HoldEm extends JPanel implements ActionListener {
 					ct[x] = "10";
 			}
 
-			hd1 = ct[0];
-			hd2 = ct[1];
-			ad1 = ct[2];
-			ad2 = ct[3];
+//			hd1 = ct[0];
+//			hd2 = ct[1];
+//			ad1 = ct[2];
+//			ad2 = ct[3];
 			//Added code for multiplayer game
-			ad21 = ct[4];
-			ad22 = ct[5];
-			ad31 = ct[6];
-			ad32 = ct[7];
+//			ad21 = ct[4];
+//			ad22 = ct[5];
+//			ad31 = ct[6];
+//			ad32 = ct[7];
 			//continuing existing code
-			cd1 = ct[8];
-			cd2 = ct[9];
-			cd3 = ct[10];
-			cd4 = ct[11];
-			cd5 = ct[12];
+//			cd1 = ct[8];
+//			cd2 = ct[9];
+//			cd3 = ct[10];
+//			cd4 = ct[11];
+//			cd5 = ct[12];
 
 			// making the suit objects to identify card suits
 			hd1s = new Suit(h1);
@@ -264,7 +265,7 @@ public class HoldEm extends JPanel implements ActionListener {
 			f.gridx = 1;
 			f.gridy = 0;
 			Table.add(AICard1Fliped, f);
-			AICard1Text = new JLabel(ad1);
+			AICard1Text = new JLabel(ad1.getName());
 			f.gridx = 1;
 			f.gridy = 0;
 			AICard1Text.setFont(new Font("sansserif", Font.BOLD, 84));
@@ -280,7 +281,7 @@ public class HoldEm extends JPanel implements ActionListener {
 			f.gridx = 2;
 			f.gridy = 0;
 			Table.add(AICard2Fliped, f);
-			AICard2Text = new JLabel(ad2);
+			AICard2Text = new JLabel(ad2.getName());
 			f.gridx = 2;
 			f.gridy = 0;
 			AICard2Text.setFont(new Font("sansserif", Font.BOLD, 84));
@@ -292,7 +293,7 @@ public class HoldEm extends JPanel implements ActionListener {
 			Table.add(AICard2, f);
 			AICard2.setVisible(false);
 			//First computer players chips with value; new chip image and fonts
-			compChipNum = new JLabel("$" + computer.getMoney());
+			compChipNum = new JLabel("$" + computer.getChips());
 			f.gridx = 3;
 			f.gridy = 0;
 			compChipNum.setFont(new Font("sansserif", Font.CENTER_BASELINE, 18));
@@ -315,7 +316,7 @@ public class HoldEm extends JPanel implements ActionListener {
 			f.gridx = 5;
 			f.gridy = 0;
 			Table.add(AI2Card1Fliped, f);
-			AI2Card1Text = new JLabel(ad21);
+			AI2Card1Text = new JLabel(ad21.getName());
 			f.gridx = 5;
 			f.gridy = 0;
 			AI2Card1Text.setFont(new Font("sansserif", Font.BOLD, 84));
@@ -331,7 +332,7 @@ public class HoldEm extends JPanel implements ActionListener {
 			f.gridx = 6;
 			f.gridy = 0;
 			Table.add(AI2Card2Fliped, f);
-			AI2Card2Text = new JLabel(ad22);
+			AI2Card2Text = new JLabel(ad22.getName());
 			f.gridx = 6;
 			f.gridy = 0;
 			AI2Card2Text.setFont(new Font("sansserif", Font.BOLD, 84));
@@ -343,7 +344,7 @@ public class HoldEm extends JPanel implements ActionListener {
 			Table.add(AI2Card2, f);
 			AI2Card2.setVisible(false);
 			//Second computer players chips with value; new chip image and fonts
-			compChipNum2 = new JLabel("$" + computer2.getMoney());
+			compChipNum2 = new JLabel("$" + computer2.getChips());
 			f.gridx = 7;
 			f.gridy = 0;
 			compChipNum2.setFont(new Font("sansserif", Font.CENTER_BASELINE, 18));
@@ -390,7 +391,7 @@ public class HoldEm extends JPanel implements ActionListener {
 			Table.add(H1, f);
 			H1.setVisible(true);
 			//Sets card 1 to its true value; visibility set to false 
-			TableCard1Text = new JLabel(cd1);
+			TableCard1Text = new JLabel(cd1.getName());
 			f.gridx = 2;
 			f.gridy = 1;
 			TableCard1Text.setFont(new Font("sansserif", Font.BOLD, 84));
@@ -409,7 +410,7 @@ public class HoldEm extends JPanel implements ActionListener {
 			Table.add(H2, f);
 			H2.setVisible(true);
 			//Sets card 2 to its true value; visibility set to false
-			TableCard2Text = new JLabel(cd2);
+			TableCard2Text = new JLabel(cd2.getName());
 			f.gridx = 3;
 			f.gridy = 1;
 			TableCard2Text.setFont(new Font("sansserif", Font.BOLD, 84));
@@ -428,7 +429,7 @@ public class HoldEm extends JPanel implements ActionListener {
 			Table.add(H3, f);
 			H3.setVisible(true);
 			//Sets card 3 to its true value; visibility set to false
-			TableCard3Text = new JLabel(cd3);
+			TableCard3Text = new JLabel(cd3.getName());
 			f.gridx = 4;
 			f.gridy = 1;
 			TableCard3Text.setFont(new Font("sansserif", Font.BOLD, 84));
@@ -447,7 +448,7 @@ public class HoldEm extends JPanel implements ActionListener {
 			Table.add(H4, f);
 			H4.setVisible(true);
 			//Sets card 4 to its true value; visibility set to false
-			TableCard4Text = new JLabel(cd4);
+			TableCard4Text = new JLabel(cd4.getName());
 			f.gridx = 5;
 			f.gridy = 1;
 			TableCard4Text.setFont(new Font("sansserif", Font.BOLD, 84));
@@ -466,7 +467,7 @@ public class HoldEm extends JPanel implements ActionListener {
 			Table.add(H5, f);
 			H5.setVisible(true);
 			//Sets card 5 to its true value; visibility set to false
-			TableCard5Text = new JLabel(cd5);
+			TableCard5Text = new JLabel(cd5.getName());
 			f.gridx = 6;
 			f.gridy = 1;
 			TableCard5Text.setFont(new Font("sansserif", Font.BOLD, 84));
@@ -519,7 +520,7 @@ public class HoldEm extends JPanel implements ActionListener {
 			f.gridx = 1;
 			f.gridy = 2;
 			Table.add(AI3Card1Fliped, f);
-			AI3Card1Text = new JLabel(ad31);
+			AI3Card1Text = new JLabel(ad31.getName());
 			f.gridx = 1;
 			f.gridy = 2;
 			AI3Card1Text.setFont(new Font("sansserif", Font.BOLD, 84));
@@ -535,7 +536,7 @@ public class HoldEm extends JPanel implements ActionListener {
 			f.gridx = 2;
 			f.gridy = 2;
 			Table.add(AI3Card2Fliped, f);
-			AI3Card2Text = new JLabel(ad32);
+			AI3Card2Text = new JLabel(ad32.getName());
 			f.gridx = 2;
 			f.gridy = 2;
 			AI3Card2Text.setFont(new Font("sansserif", Font.BOLD, 84));
@@ -547,7 +548,7 @@ public class HoldEm extends JPanel implements ActionListener {
 			Table.add(AI3Card2, f);
 			AI3Card2.setVisible(false);
 			//Third computer players chips with value; new chip image and fonts
-			compChipNum3 = new JLabel("$" + computer3.getMoney());
+			compChipNum3 = new JLabel("$" + computer3.getChips());
 			f.gridx = 3;
 			f.gridy = 2;
 			compChipNum3.setFont(new Font("sansserif", Font.CENTER_BASELINE, 18));
@@ -567,7 +568,7 @@ public class HoldEm extends JPanel implements ActionListener {
 			Table.add(player, f);
 
 			// sets players first card
-			JLabel PlayerCard1Text = new JLabel(hd1);
+			JLabel PlayerCard1Text = new JLabel(hd1.getName());
 			f.gridx = 5;
 			f.gridy = 2;
 			PlayerCard1Text.setFont(new Font("sansserif", Font.BOLD, 84));
@@ -578,7 +579,7 @@ public class HoldEm extends JPanel implements ActionListener {
 			Table.add(PlayerCard1, f);
 
 			// sets players second card
-			JLabel PlayerCard2Text = new JLabel(hd2);
+			JLabel PlayerCard2Text = new JLabel(hd2.getName());
 			f.gridx = 6;
 			f.gridy = 2;
 			PlayerCard2Text.setFont(new Font("sansserif", Font.BOLD, 84));
@@ -589,7 +590,7 @@ public class HoldEm extends JPanel implements ActionListener {
 			Table.add(PlayerCard2, f);
 
 			// sets players chips- new chip image and fonts
-			playerChipNum = new JLabel("$" + human.getMoney());
+			playerChipNum = new JLabel("$" + human.getChips());
 			f.gridx = 7;
 			f.gridy = 2;
 			playerChipNum.setFont(new Font("sansserif", Font.CENTER_BASELINE, 18));
@@ -662,11 +663,11 @@ public class HoldEm extends JPanel implements ActionListener {
 			 * Ante up to begin the hand
 			 */
 			JOptionPane.showMessageDialog(null, "Auto ante of $10");
-			human.takeMoney(10);
-			computer.takeMoney(10);
+			human.takeChips(10);
+			computer.takeChips(10);
 			//Added code for multiplayer game
-			computer2.takeMoney(10);
-			computer3.takeMoney(10);
+			computer2.takeChips(10);
+			computer3.takeChips(10);
 			pool += 40;
 			
 			/**
@@ -680,21 +681,21 @@ public class HoldEm extends JPanel implements ActionListener {
 				bet = JOptionPane.showInputDialog(null, "Place your bet");
 				pBet = Integer.parseInt(bet);
 			}
-			if (pBet >= human.getMoney())
-				pBet = human.getMoney();
+			if (pBet >= human.getChips())
+				pBet = human.getChips();
 			//All four players have the same bet amount
-			human.takeMoney(pBet);
-			computer.takeMoney(pBet);
-			computer2.takeMoney(pBet);
-			computer3.takeMoney(pBet);
+			human.takeChips(pBet);
+			computer.takeChips(computer.bet());
+			computer2.takeChips(computer2.bet());
+			computer3.takeChips(computer3.bet());
 			//Add to the pool
 			pool += pBet * 4;
 			//Set new amounts in the chip labels
 			potChipNum.setText("$" + pool);
-			compChipNum.setText("$" + computer.getMoney());
-			compChipNum2.setText("$" + computer2.getMoney());
-			compChipNum3.setText("$" + computer3.getMoney());
-			playerChipNum.setText("$" + human.getMoney());
+			compChipNum.setText("$" + computer.getChips());
+			compChipNum2.setText("$" + computer2.getChips());
+			compChipNum3.setText("$" + computer3.getChips());
+			playerChipNum.setText("$" + human.getChips());
 			//Change bet buttons for next round of betting
 			Bet1.setVisible(false);
 			Bet2.setVisible(true);
@@ -729,18 +730,18 @@ public class HoldEm extends JPanel implements ActionListener {
 				pBet = Integer.parseInt(bet);
 			}
 			//All four players have the same bet amount
-			human.takeMoney(pBet);
-			computer.takeMoney(pBet);
-			computer2.takeMoney(pBet);
-			computer3.takeMoney(pBet);
+			human.takeChips(pBet);
+			computer.takeChips(computer.bet());
+			computer2.takeChips(computer2.bet());
+			computer3.takeChips(computer3.bet());
 			//Add to the pool
 			pool += pBet * 4;
 			//Set new amounts in the chip labels
 			potChipNum.setText("$" + pool);
-			compChipNum.setText("$" + computer.getMoney());
-			compChipNum2.setText("$" + computer2.getMoney());
-			compChipNum3.setText("$" + computer3.getMoney());
-			playerChipNum.setText("$" + human.getMoney());
+			compChipNum.setText("$" + computer.getChips());
+			compChipNum2.setText("$" + computer2.getChips());
+			compChipNum3.setText("$" + computer3.getChips());
+			playerChipNum.setText("$" + human.getChips());
 			//Change bet buttons for next round of betting
 			Bet2.setVisible(false);
 			Bet3.setVisible(true);
@@ -767,18 +768,18 @@ public class HoldEm extends JPanel implements ActionListener {
 				pBet = Integer.parseInt(bet);
 			}
 			//All four players have the same bet amount
-			human.takeMoney(pBet);
-			computer.takeMoney(pBet);
-			computer2.takeMoney(pBet);
-			computer3.takeMoney(pBet);
+			human.takeChips(pBet);
+			computer.takeChips(pBet);
+			computer2.takeChips(pBet);
+			computer3.takeChips(pBet);
 			//Add to the pool
 			pool += pBet * 4;
 			//Set new amounts in the chip labels
 			potChipNum.setText("$" + pool);
-			compChipNum.setText("$" + computer.getMoney());
-			compChipNum2.setText("$" + computer2.getMoney());
-			compChipNum3.setText("$" + computer3.getMoney());
-			playerChipNum.setText("$" + human.getMoney());
+			compChipNum.setText("$" + computer.getChips());
+			compChipNum2.setText("$" + computer2.getChips());
+			compChipNum3.setText("$" + computer3.getChips());
+			playerChipNum.setText("$" + human.getChips());
 			//Change bet buttons for next round of betting
 			Bet3.setVisible(false);
 			Bet4.setVisible(true);
@@ -805,23 +806,23 @@ public class HoldEm extends JPanel implements ActionListener {
 				pBet = Integer.parseInt(bet);
 			}
 			//All four players have the same bet amount
-			human.takeMoney(pBet);
-			computer.takeMoney(pBet);
-			computer2.takeMoney(pBet);
-			computer3.takeMoney(pBet);
+			human.takeChips(pBet);
+			computer.takeChips(pBet);
+			computer2.takeChips(pBet);
+			computer3.takeChips(pBet);
 			//Add to the pool
 			pool += pBet * 4;
 			//Set new amounts in the chip labels
 			potChipNum.setText("$" + pool);
-			compChipNum.setText("$" + computer.getMoney());
-			compChipNum2.setText("$" + computer2.getMoney());
-			compChipNum3.setText("$" + computer3.getMoney());
-			playerChipNum.setText("$" + human.getMoney());
+			compChipNum.setText("$" + computer.getChips());
+			compChipNum2.setText("$" + computer2.getChips());
+			compChipNum3.setText("$" + computer3.getChips());
+			playerChipNum.setText("$" + human.getChips());
 			//Disable last bet button; no more bets
 			Bet4.setEnabled(false);
 			
-			humanMon = human.getMoney();
-			compMon = computer.getMoney();
+			humanMon = human.getChips();
+			compMon = computer.getChips();
 			
 			/**
 			 * Time to display opponents cards
@@ -867,14 +868,14 @@ public class HoldEm extends JPanel implements ActionListener {
 					chooser.cplayer2, chooser.cplayer3, chooser.hcards);
 			if (win == 0) {
 				JOptionPane.showMessageDialog(null, "You win");
-				human.addMoney(pool); 
+				human.addChips(pool); 
 				frame.dispose();
 				new HoldEm();
-				if (human.getMoney() == 0)
+				if (human.getChips() == 0)
 					JOptionPane.showMessageDialog(null, "you lose");
 			} else if (win == 1) {
 				JOptionPane.showMessageDialog(null, "You lose");
-				computer.addMoney(pool);
+				computer.addChips(pool);
 				frame.dispose();
 				new HoldEm();
 			} else {

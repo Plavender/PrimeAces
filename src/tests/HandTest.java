@@ -34,6 +34,7 @@ public class HandTest {
 	@Test
 	public void testHand() {
 		Hand testHand = new Hand();
+		assertEquals("Adding first card", 1, testHand.addCard(card1));
 	}
 
 	@Test

@@ -5,7 +5,6 @@ import org.junit.Test;
 
 import poker.Card;
 import poker.Computer;
-import poker.Hand;
 import poker.Player;
 
 
