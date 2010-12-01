@@ -31,6 +31,7 @@ public class HoldEm extends JPanel implements ActionListener {
 	private Button Bet1, Bet2, Bet3, Bet4, Fold;
 	private int pool;
 	private Play playArea = new Play();
+	private Score score = new Score();
 	private JLabel AICard1Fliped, AICard2Fliped, AICard1Text, AICard1,
 			AICard2Text, AICard2, TableCard1Text, TableCard1, TableCard2Text,
 			TableCard2, TableCard3Text, TableCard3, TableCard4Text, TableCard4,
@@ -47,7 +48,7 @@ public class HoldEm extends JPanel implements ActionListener {
 	/**
 	 * New label variables for blank spaces in the middle of the table
 	 */
-	private JLabel B1, B2, B3, B4, B5, B6, B7, B8;
+	private JLabel B1, B2, B3, B4, B5;
 	
 	private int pBet;
 	private int humanMon = 250;
@@ -56,9 +57,8 @@ public class HoldEm extends JPanel implements ActionListener {
 	 */
 	private int compMon = 250, compMon2 = 250, compMon3 = 250;
 	
-	private String bet;
-	private Card  h1, h2, a1, a2, hd1, hd2, ad1, ad2, c1, c2, c3, c4, c5,
-	cd1, cd2, cd3, cd4, cd5;
+	private String bet, playerName;
+	private Card  h1, h2, a1, a2, hd1, hd2, ad1, ad2, c1, c2, c3, c4, c5;
 	/**
 	 * Added variables for multiplayer game
 	 */
@@ -71,11 +71,12 @@ public class HoldEm extends JPanel implements ActionListener {
 	private Suit ad21s, ad22s, ad31s, ad32s;
 	
 	private JFrame frame;
-	private Player human = new Player(0);
-	private Computer computer = new Computer(0);
+
+	private User human = new User(0);
 	/**
 	 * New variables for multiplayer game.
 	 */
+	private Computer computer = new Computer(0);
 	private Computer computer2 = new Computer(0);
 	private Computer computer3 = new Computer(0);
 	
@@ -83,7 +84,6 @@ public class HoldEm extends JPanel implements ActionListener {
 
 		Deck playDeck = new Deck();
 //		playDeck.makeDeck();
-		pool = 0;
 		
 		//Original code for two player game
 		computer.addChips(compMon);
@@ -98,12 +98,28 @@ public class HoldEm extends JPanel implements ActionListener {
 		 * the test condition to while humanMon > 0 and other code revisions
 		 */
 		boolean playing = true;
-		int x = 1;
+//		int x = 1;
+		playerName = human.getUserName();
 		while (playing) {
 
+			pool = 0;
 			// shuffle the deck
 			playDeck.shuffle();
 
+			h1 = playDeck.getCard();
+			h2 = playDeck.getCard();
+			a1 = playDeck.getCard();
+			a2 = playDeck.getCard();
+			hd1 = playDeck.getCard();
+			hd2 = playDeck.getCard();
+			ad1 = playDeck.getCard();
+			ad2 = playDeck.getCard();
+			c1 = playDeck.getCard();
+			c2 = playDeck.getCard();
+			c3 = playDeck.getCard();
+			c4 = playDeck.getCard();
+			c5 = playDeck.getCard();
+			
 			// getting the card data
 			// dealing cards
 			h1 = playDeck.getCard();
@@ -116,27 +132,61 @@ public class HoldEm extends JPanel implements ActionListener {
 			a31 = playDeck.getCard();
 			a32 = playDeck.getCard();
 
+			human.addPlayerHand(h1, 1);
+			computer.addPlayerHand(a1, 1);
+			//added code for multiplayer game
+			computer2.addPlayerHand(a21, 1);
+			computer3.addPlayerHand(a31, 1);
+			
+			human.addPlayerHand(h2, 2);
+			computer.addPlayerHand(a2, 2);
+			//added code for multiplayer game
+			computer2.addPlayerHand(a22, 2);
+			computer3.addPlayerHand(a32, 2);
+
 			human.addCard(h1);
 			computer.addCard(a1);
-			//added code for multiplayer game
 			computer2.addCard(a21);
 			computer3.addCard(a31);
 			
 			human.addCard(h2);
 			computer.addCard(a2);
-			//added code for multiplayer game
 			computer2.addCard(a22);
 			computer3.addCard(a32);
-
+			
+			human.addCard(c1);
+			human.addCard(c2);
+			human.addCard(c3);
+			human.addCard(c4);
+			human.addCard(c5);
+			
+			computer.addCard(c1);
+			computer.addCard(c2);
+			computer.addCard(c3);
+			computer.addCard(c4);
+			computer.addCard(c5);
+			
+			computer2.addCard(c1);
+			computer2.addCard(c2);
+			computer2.addCard(c3);
+			computer2.addCard(c4);
+			computer2.addCard(c5);
+			
+			computer3.addCard(c1);
+			computer3.addCard(c2);
+			computer3.addCard(c3);
+			computer3.addCard(c4);
+			computer3.addCard(c5);
+			
 //			hd1 = (h1.substring(1, 2));
 //			hd2 = (h2.substring(1, 2));
 //			ad1 = (a1.substring(1, 2));
 //			ad2 = (a2.substring(1, 2));
 //			//added code for multiplayer game
-//			ad21 = (a21.substring(1, 2));
-//			ad22 = (a22.substring(1, 2));
-//			ad31 = (a31.substring(1, 2));
-//			ad32 = (a32.substring(1, 2));
+			ad21 = playDeck.getCard();
+			ad22 = playDeck.getCard();
+			ad31 = playDeck.getCard();
+			ad32 = playDeck.getCard();
 
 			// getting and organizing play card data
 			c1 = playDeck.getCard();
@@ -158,7 +208,7 @@ public class HoldEm extends JPanel implements ActionListener {
 //			cd4 = (c4.substring(1, 2));
 //			cd5 = (c5.substring(1, 2));
 
-			String[] ct = new String[15];
+//			String[] ct = new String[15];
 
 			// getting rid of the ts
 //			ct[0] = hd1;
@@ -178,11 +228,11 @@ public class HoldEm extends JPanel implements ActionListener {
 //			ct[12] = cd5;
 
 			//changed test from 9 to 15 to match array length
-			for (x = 0; x < 13; x++) {
-				String s = ct[x];
-				if (s.equals("t"))
-					ct[x] = "10";
-			}
+//			for (x = 0; x < 13; x++) {
+//				String s = ct[x];
+//				if (s.equals("t"))
+//					ct[x] = "10";
+//			}
 
 //			hd1 = ct[0];
 //			hd2 = ct[1];
@@ -241,9 +291,7 @@ public class HoldEm extends JPanel implements ActionListener {
 			 * Code also has to be added (if/else) to terminate the program
 			 * is no name is chosen.
 			 */
-			String playerName = JOptionPane.showInputDialog(null,
-					"Enter your player name");
-			
+//			playerName = human.getUserName();
 			//Images for play area- new chip image
 			ImageIcon deck = new ImageIcon("cardback.jpg");
 			ImageIcon chip = new ImageIcon("chip2.jpg");
@@ -376,7 +424,7 @@ public class HoldEm extends JPanel implements ActionListener {
 			B3 = new JLabel(bgrd);
 			f.gridx = 0;
 			f.gridy = 1;
-			Table.add(B1, f);
+			Table.add(B3, f);
 			//Second space
 			B4 = new JLabel(bgrd);
 			f.gridx = 1;
@@ -391,7 +439,7 @@ public class HoldEm extends JPanel implements ActionListener {
 			Table.add(H1, f);
 			H1.setVisible(true);
 			//Sets card 1 to its true value; visibility set to false 
-			TableCard1Text = new JLabel(cd1.getName());
+			TableCard1Text = new JLabel(c1.getName());
 			f.gridx = 2;
 			f.gridy = 1;
 			TableCard1Text.setFont(new Font("sansserif", Font.BOLD, 84));
@@ -410,7 +458,7 @@ public class HoldEm extends JPanel implements ActionListener {
 			Table.add(H2, f);
 			H2.setVisible(true);
 			//Sets card 2 to its true value; visibility set to false
-			TableCard2Text = new JLabel(cd2.getName());
+			TableCard2Text = new JLabel(c2.getName());
 			f.gridx = 3;
 			f.gridy = 1;
 			TableCard2Text.setFont(new Font("sansserif", Font.BOLD, 84));
@@ -429,7 +477,7 @@ public class HoldEm extends JPanel implements ActionListener {
 			Table.add(H3, f);
 			H3.setVisible(true);
 			//Sets card 3 to its true value; visibility set to false
-			TableCard3Text = new JLabel(cd3.getName());
+			TableCard3Text = new JLabel(c3.getName());
 			f.gridx = 4;
 			f.gridy = 1;
 			TableCard3Text.setFont(new Font("sansserif", Font.BOLD, 84));
@@ -448,7 +496,7 @@ public class HoldEm extends JPanel implements ActionListener {
 			Table.add(H4, f);
 			H4.setVisible(true);
 			//Sets card 4 to its true value; visibility set to false
-			TableCard4Text = new JLabel(cd4.getName());
+			TableCard4Text = new JLabel(c4.getName());
 			f.gridx = 5;
 			f.gridy = 1;
 			TableCard4Text.setFont(new Font("sansserif", Font.BOLD, 84));
@@ -467,7 +515,7 @@ public class HoldEm extends JPanel implements ActionListener {
 			Table.add(H5, f);
 			H5.setVisible(true);
 			//Sets card 5 to its true value; visibility set to false
-			TableCard5Text = new JLabel(cd5.getName());
+			TableCard5Text = new JLabel(c5.getName());
 			f.gridx = 6;
 			f.gridy = 1;
 			TableCard5Text.setFont(new Font("sansserif", Font.BOLD, 84));
@@ -640,25 +688,7 @@ public class HoldEm extends JPanel implements ActionListener {
 			//Assemble the package
 			frame.pack();
 			frame.setVisible(true);
-		}
-	}
-	
-	
-
-	public void actionPerformed(ActionEvent e) {
-		
-		if (e.getSource() == Fold) {
-			playArea.wipe();
-			human.wipe();
-			computer.wipe();
-			//Added code for multiplayer game
-			computer2.wipe();
-			computer3.wipe();
 			
-			JOptionPane.showMessageDialog(null, "Better luck next time");
-			frame.dispose();
-			new HoldEm();
-		} else if (e.getSource() == Bet1) {
 			/**
 			 * Ante up to begin the hand
 			 */
@@ -674,9 +704,31 @@ public class HoldEm extends JPanel implements ActionListener {
 			 * First round of betting
 			 */
 			bet = JOptionPane.showInputDialog(null, "Place your bet");
+			if (bet.equalsIgnoreCase("fold"))
+			{
+				playArea.wipe();
+				human.wipe();
+				human.scoreWipe();
+				computer.wipe();
+				//Added code for multiplayer game
+				computer2.wipe();
+				computer3.wipe();
+				computer.scoreWipe();
+				computer2.scoreWipe();
+				computer3.scoreWipe();
+				
+				JOptionPane.showMessageDialog(null, "Better luck next time");
+				frame.dispose();
+	//			new HoldEm();
+			}
 			pBet = Integer.parseInt(bet);
 			//Error handling to handle negative numbers or zero dollar bets
-			while (pBet <= 0){
+			while (pBet <= 0 || pBet > human.getChips()){
+				JOptionPane.showMessageDialog(null, "Please enter a valid bet");
+				bet = JOptionPane.showInputDialog(null, "Place your bet");
+				pBet = Integer.parseInt(bet);
+			}
+			while (pBet <= 0 || pBet > human.getChips()){
 				JOptionPane.showMessageDialog(null, "Please enter a valid bet");
 				bet = JOptionPane.showInputDialog(null, "Place your bet");
 				pBet = Integer.parseInt(bet);
@@ -717,11 +769,29 @@ public class HoldEm extends JPanel implements ActionListener {
 			validate();
 			//First round of betting is over
 			
-		} else if (e.getSource() == Bet2) {
 			/**
 			 * Second round of betting 
 			 */
 			bet = JOptionPane.showInputDialog(null, "Place your bet");
+			if (bet.equalsIgnoreCase("fold"))
+			{
+				playArea.wipe();
+				human.wipe();
+				human.scoreWipe();
+				computer.wipe();
+				//Added code for multiplayer game
+				computer2.wipe();
+				computer3.wipe();
+				computer.scoreWipe();
+				computer2.scoreWipe();
+				computer3.scoreWipe();
+				
+				JOptionPane.showMessageDialog(null, "Better luck next time");
+				frame.dispose();
+//				new HoldEm();
+				
+				
+			}
 			pBet = Integer.parseInt(bet);
 			//Error handling to handle negative numbers or zero dollar bets
 			while (pBet <= 0){
@@ -755,11 +825,27 @@ public class HoldEm extends JPanel implements ActionListener {
 			validate();
 			//Second round of betting is over
 			
-		} else if (e.getSource() == Bet3) {
 			/**
 			 * Third round of betting 
 			 */
 			bet = JOptionPane.showInputDialog(null, "Place your bet");
+			if (bet.equalsIgnoreCase("fold"))
+			{
+				playArea.wipe();
+				human.wipe();
+				human.scoreWipe();
+				computer.wipe();
+				//Added code for multiplayer game
+				computer2.wipe();
+				computer3.wipe();
+				computer.scoreWipe();
+				computer2.scoreWipe();
+				computer3.scoreWipe();
+				
+				JOptionPane.showMessageDialog(null, "Better luck next time");
+				frame.dispose();
+		//		new HoldEm();
+			}
 			pBet = Integer.parseInt(bet);
 			//Error handling to handle negative numbers or zero dollar bets
 			while (pBet <= 0){
@@ -792,12 +878,28 @@ public class HoldEm extends JPanel implements ActionListener {
 			frame.setVisible(true);
 			validate();
 			//Third round of betting is over
-			
-		} else if (e.getSource() == Bet4) {
+
 			/**
 			 * Last round of betting 
 			 */
 			bet = JOptionPane.showInputDialog(null, "Place your bet");
+			if (bet.equalsIgnoreCase("fold"))
+			{
+				playArea.wipe();
+				human.wipe();
+				human.scoreWipe();
+				computer.wipe();
+				//Added code for multiplayer game
+				computer2.wipe();
+				computer3.wipe();
+				computer.scoreWipe();
+				computer2.scoreWipe();
+				computer3.scoreWipe();
+				
+				JOptionPane.showMessageDialog(null, "Better luck next time");
+				frame.dispose();
+//				new HoldEm();
+			}
 			pBet = Integer.parseInt(bet);
 			//Error handling to handle negative numbers or zero dollar bets
 			while (pBet <= 0){
@@ -861,32 +963,374 @@ public class HoldEm extends JPanel implements ActionListener {
 			 * Determine winner
 			 * "Sets" class modified to determine winner
 			 */
-			Sets chooser = new Sets(human.getHand(), computer.getHand(),
-					computer2.getHand(), computer2.getHand(), playArea.getInPlay());
+//			Sets chooser = new Sets(human.getHand(), computer.getHand(),
+//					computer2.getHand(), computer2.getHand(), playArea.getInPlay());
 			
-			int win = Score.playerWin(chooser.hplayer, chooser.cplayer,
-					chooser.cplayer2, chooser.cplayer3, chooser.hcards);
-			if (win == 0) {
-				JOptionPane.showMessageDialog(null, "You win");
-				human.addChips(pool); 
-				frame.dispose();
-				new HoldEm();
-				if (human.getChips() == 0)
-					JOptionPane.showMessageDialog(null, "you lose");
-			} else if (win == 1) {
-				JOptionPane.showMessageDialog(null, "You lose");
-				computer.addChips(pool);
-				frame.dispose();
-				new HoldEm();
-			} else {
-				JOptionPane.showMessageDialog(null, "The game is a tie");
+//			int win = Score.playerWin(chooser.hplayer, chooser.cplayer,
+//					chooser.cplayer2, chooser.cplayer3, chooser.hcards);
+//			if (win == 0) {
+//				JOptionPane.showMessageDialog(null, "You win");
+//				human.addChips(pool); 
+//				frame.dispose();
+//				new HoldEm();
+//				if (human.getChips() == 0)
+//					JOptionPane.showMessageDialog(null, "you lose");
+//			} else if (win == 1) {
+//				JOptionPane.showMessageDialog(null, "You lose");
+//				computer.addChips(pool);
+//				frame.dispose();
+//				new HoldEm();
+//			} else {
+//				JOptionPane.showMessageDialog(null, "The game is a tie");
+//			}
+			JOptionPane.showMessageDialog(null, "you win");
+			
+				score.pickWinner().addChips(pool);
 				playArea.wipe();
 				human.wipe();
+				human.scoreWipe();
 				computer.wipe();
+				computer2.wipe();
+				computer3.wipe();
+				computer.scoreWipe();
+				computer2.scoreWipe();
+				computer3.scoreWipe();
 				frame.dispose();
-				new HoldEm();
+	//			new HoldEm();
 				
 			}
+	}
+	
+	
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		
+		if (e.getSource() == Fold) {
+			playArea.wipe();
+			human.wipe();
+			human.scoreWipe();
+			computer.wipe();
+			//Added code for multiplayer game
+			computer2.wipe();
+			computer3.wipe();
+			computer.scoreWipe();
+			computer2.scoreWipe();
+			computer3.scoreWipe();
+			
+			JOptionPane.showMessageDialog(null, "Better luck next time");
+			frame.dispose();
+	//		new HoldEm();
+		} else if (e.getSource() == Bet1) {
+			/**
+			 * Ante up to begin the hand
+			 */
+			JOptionPane.showMessageDialog(null, "Auto ante of $10");
+			human.takeChips(10);
+			computer.takeChips(10);
+			//Added code for multiplayer game
+			computer2.takeChips(10);
+			computer3.takeChips(10);
+			pool += 40;
+			
+			/**
+			 * First round of betting
+			 */
+			bet = JOptionPane.showInputDialog(null, "Place your bet");
+			if (bet.equalsIgnoreCase("fold"))
+			{
+				playArea.wipe();
+				human.wipe();
+				human.scoreWipe();
+				computer.wipe();
+				//Added code for multiplayer game
+				computer2.wipe();
+				computer3.wipe();
+				computer.scoreWipe();
+				computer2.scoreWipe();
+				computer3.scoreWipe();
+				
+				JOptionPane.showMessageDialog(null, "Better luck next time");
+				frame.dispose();
+	//			new HoldEm();
+			}
+			pBet = Integer.parseInt(bet);
+			//Error handling to handle negative numbers or zero dollar bets
+			while (pBet <= 0 || pBet > human.getChips()){
+				JOptionPane.showMessageDialog(null, "Please enter a valid bet");
+				bet = JOptionPane.showInputDialog(null, "Place your bet");
+				pBet = Integer.parseInt(bet);
+			}
+			while (pBet <= 0 || pBet > human.getChips()){
+				JOptionPane.showMessageDialog(null, "Please enter a valid bet");
+				bet = JOptionPane.showInputDialog(null, "Place your bet");
+				pBet = Integer.parseInt(bet);
+			}
+			if (pBet >= human.getChips())
+				pBet = human.getChips();
+			//All four players have the same bet amount
+			human.takeChips(pBet);
+			computer.takeChips(computer.bet());
+			computer2.takeChips(computer2.bet());
+			computer3.takeChips(computer3.bet());
+			//Add to the pool
+			pool += pBet * 4;
+			//Set new amounts in the chip labels
+			potChipNum.setText("$" + pool);
+			compChipNum.setText("$" + computer.getChips());
+			compChipNum2.setText("$" + computer2.getChips());
+			compChipNum3.setText("$" + computer3.getChips());
+			playerChipNum.setText("$" + human.getChips());
+			//Change bet buttons for next round of betting
+			Bet1.setVisible(false);
+			Bet2.setVisible(true);
+			//remove the deck card for card one- replace with true value- new code
+			TableCard1Text.setVisible(true);
+			TableCard1.setVisible(true);
+			H1.setVisible(false);
+			//remove the deck card for card two- replace with true value- new code
+			TableCard2Text.setVisible(true);
+			TableCard2.setVisible(true);
+			H2.setVisible(false);
+			//remove the deck card for card three- replace with true value- new code
+			TableCard3Text.setVisible(true);
+			TableCard3.setVisible(true);
+			H3.setVisible(false);
+			//Refresh GUI
+			frame.pack();
+			frame.setVisible(true);
+			validate();
+			//First round of betting is over
+			
+		} else if (e.getSource() == Bet2) {
+			/**
+			 * Second round of betting 
+			 */
+			bet = JOptionPane.showInputDialog(null, "Place your bet");
+			if (bet.equalsIgnoreCase("fold"))
+			{
+				playArea.wipe();
+				human.wipe();
+				human.scoreWipe();
+				computer.wipe();
+				//Added code for multiplayer game
+				computer2.wipe();
+				computer3.wipe();
+				computer.scoreWipe();
+				computer2.scoreWipe();
+				computer3.scoreWipe();
+				
+				JOptionPane.showMessageDialog(null, "Better luck next time");
+				frame.dispose();
+//				new HoldEm();
+			}
+			pBet = Integer.parseInt(bet);
+			//Error handling to handle negative numbers or zero dollar bets
+			while (pBet <= 0){
+				JOptionPane.showMessageDialog(null, "Please enter a valid bet");
+				bet = JOptionPane.showInputDialog(null, "Place your bet");
+				pBet = Integer.parseInt(bet);
+			}
+			//All four players have the same bet amount
+			human.takeChips(pBet);
+			computer.takeChips(computer.bet());
+			computer2.takeChips(computer2.bet());
+			computer3.takeChips(computer3.bet());
+			//Add to the pool
+			pool += pBet * 4;
+			//Set new amounts in the chip labels
+			potChipNum.setText("$" + pool);
+			compChipNum.setText("$" + computer.getChips());
+			compChipNum2.setText("$" + computer2.getChips());
+			compChipNum3.setText("$" + computer3.getChips());
+			playerChipNum.setText("$" + human.getChips());
+			//Change bet buttons for next round of betting
+			Bet2.setVisible(false);
+			Bet3.setVisible(true);
+			//remove the deck card for card four- replace with true value- new code
+			TableCard4Text.setVisible(true);
+			TableCard4.setVisible(true);
+			H4.setVisible(false);
+			//Refresh GUI
+			frame.pack();
+			frame.setVisible(true);
+			validate();
+			//Second round of betting is over
+			
+		} else if (e.getSource() == Bet3) {
+			/**
+			 * Third round of betting 
+			 */
+			bet = JOptionPane.showInputDialog(null, "Place your bet");
+			if (bet.equalsIgnoreCase("fold"))
+			{
+				playArea.wipe();
+				human.wipe();
+				human.scoreWipe();
+				computer.wipe();
+				//Added code for multiplayer game
+				computer2.wipe();
+				computer3.wipe();
+				computer.scoreWipe();
+				computer2.scoreWipe();
+				computer3.scoreWipe();
+				
+				JOptionPane.showMessageDialog(null, "Better luck next time");
+				frame.dispose();
+		//		new HoldEm();
+			}
+			pBet = Integer.parseInt(bet);
+			//Error handling to handle negative numbers or zero dollar bets
+			while (pBet <= 0){
+				JOptionPane.showMessageDialog(null, "Please enter a valid bet");
+				bet = JOptionPane.showInputDialog(null, "Place your bet");
+				pBet = Integer.parseInt(bet);
+			}
+			//All four players have the same bet amount
+			human.takeChips(pBet);
+			computer.takeChips(pBet);
+			computer2.takeChips(pBet);
+			computer3.takeChips(pBet);
+			//Add to the pool
+			pool += pBet * 4;
+			//Set new amounts in the chip labels
+			potChipNum.setText("$" + pool);
+			compChipNum.setText("$" + computer.getChips());
+			compChipNum2.setText("$" + computer2.getChips());
+			compChipNum3.setText("$" + computer3.getChips());
+			playerChipNum.setText("$" + human.getChips());
+			//Change bet buttons for next round of betting
+			Bet3.setVisible(false);
+			Bet4.setVisible(true);
+			//remove the deck card for card five- replace with true value- new code
+			TableCard5Text.setVisible(true);
+			TableCard5.setVisible(true);
+			H5.setVisible(false);
+			//Refresh GUI
+			frame.pack();
+			frame.setVisible(true);
+			validate();
+			//Third round of betting is over
+			
+		} else if (e.getSource() == Bet4) {
+			/**
+			 * Last round of betting 
+			 */
+			bet = JOptionPane.showInputDialog(null, "Place your bet");
+			if (bet.equalsIgnoreCase("fold"))
+			{
+				playArea.wipe();
+				human.wipe();
+				human.scoreWipe();
+				computer.wipe();
+				//Added code for multiplayer game
+				computer2.wipe();
+				computer3.wipe();
+				computer.scoreWipe();
+				computer2.scoreWipe();
+				computer3.scoreWipe();
+				
+				JOptionPane.showMessageDialog(null, "Better luck next time");
+				frame.dispose();
+//				new HoldEm();
+			}
+			pBet = Integer.parseInt(bet);
+			//Error handling to handle negative numbers or zero dollar bets
+			while (pBet <= 0){
+				JOptionPane.showMessageDialog(null, "Please enter a valid bet");
+				bet = JOptionPane.showInputDialog(null, "Place your bet");
+				pBet = Integer.parseInt(bet);
+			}
+			//All four players have the same bet amount
+			human.takeChips(pBet);
+			computer.takeChips(pBet);
+			computer2.takeChips(pBet);
+			computer3.takeChips(pBet);
+			//Add to the pool
+			pool += pBet * 4;
+			//Set new amounts in the chip labels
+			potChipNum.setText("$" + pool);
+			compChipNum.setText("$" + computer.getChips());
+			compChipNum2.setText("$" + computer2.getChips());
+			compChipNum3.setText("$" + computer3.getChips());
+			playerChipNum.setText("$" + human.getChips());
+			//Disable last bet button; no more bets
+			Bet4.setEnabled(false);
+			
+			humanMon = human.getChips();
+			compMon = computer.getChips();
+			
+			/**
+			 * Time to display opponents cards
+			 */
+			
+			//Billy the Kids cards exposed
+			AICard1Fliped.setVisible(false);
+			AICard2Fliped.setVisible(false);
+			AICard1Text.setVisible(true);
+			AICard1.setVisible(true);
+			AICard2Text.setVisible(true);
+			AICard2.setVisible(true);
+			
+			//Doc Hollidays cards exposed
+			AI2Card1Fliped.setVisible(false);
+			AI2Card2Fliped.setVisible(false);
+			AI2Card1Text.setVisible(true);
+			AI2Card1.setVisible(true);
+			AI2Card2Text.setVisible(true);
+			AI2Card2.setVisible(true);
+			
+			//Mavericks cards exposed
+			AI3Card1Fliped.setVisible(false);
+			AI3Card2Fliped.setVisible(false);
+			AI3Card1Text.setVisible(true);
+			AI3Card1.setVisible(true);
+			AI3Card2Text.setVisible(true);
+			AI3Card2.setVisible(true);
+			
+			//Refresh GUI
+			frame.pack();
+			frame.setVisible(true);
+			validate();
+			
+			/**
+			 * Determine winner
+			 * "Sets" class modified to determine winner
+			 */
+//			Sets chooser = new Sets(human.getHand(), computer.getHand(),
+//					computer2.getHand(), computer2.getHand(), playArea.getInPlay());
+			
+//			int win = Score.playerWin(chooser.hplayer, chooser.cplayer,
+//					chooser.cplayer2, chooser.cplayer3, chooser.hcards);
+//			if (win == 0) {
+//				JOptionPane.showMessageDialog(null, "You win");
+//				human.addChips(pool); 
+//				frame.dispose();
+//				new HoldEm();
+//				if (human.getChips() == 0)
+//					JOptionPane.showMessageDialog(null, "you lose");
+//			} else if (win == 1) {
+//				JOptionPane.showMessageDialog(null, "You lose");
+//				computer.addChips(pool);
+//				frame.dispose();
+//				new HoldEm();
+//			} else {
+//				JOptionPane.showMessageDialog(null, "The game is a tie");
+//			}
+				score.pickWinner().addChips(pool);
+				playArea.wipe();
+				human.wipe();
+				human.scoreWipe();
+				computer.wipe();
+				computer2.wipe();
+				computer3.wipe();
+				computer.scoreWipe();
+				computer2.scoreWipe();
+				computer3.scoreWipe();
+				frame.dispose();
+	//			new HoldEm();
+				
+			
 		}
 	}
 }

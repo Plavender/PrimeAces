@@ -8,8 +8,8 @@ public class HoldEmDriver {
 	 */
 	public static void main(String[] args) {
 		// Initiate new game
+		
 		@SuppressWarnings("unused")
 		HoldEm newGame = new HoldEm();
 	}
-
 }

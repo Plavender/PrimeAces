@@ -1,5 +1,6 @@
 package poker;
 import java.util.ArrayList;
+import java.util.Collections;
 
 /* 
  * Made by Davis
@@ -29,10 +30,10 @@ public class Deck
 		numbers[6] = "8";
 		numbers[7] = "9";
 		numbers[8] = "10";
-		numbers[9] = "j";
-		numbers[10] = "q";
-		numbers[11] = "k";
-		numbers[12] = "a";
+		numbers[9] = "J";
+		numbers[10] = "Q";
+		numbers[11] = "K";
+		numbers[12] = "A";
 	
 	int val =1;	
 	int x = 0;
@@ -56,7 +57,7 @@ public class Deck
 	val = 1;
 		for(int f = 0; f < 13; f++)
 		{
-			c = new Card("clubs", numbers[f], val);
+			c = new Card("hearts", numbers[f], val);
 			cardDeck.add(c);
 			x++;
 			val++;
@@ -65,7 +66,7 @@ public class Deck
 	val = 1; 
 		for(int d = 0; d < 13; d++)
 		{
-			c = new Card("clubs", numbers[d], val);
+			c = new Card("spades", numbers[d], val);
 			cardDeck.add(c);
 			x++;
 			val++;
@@ -76,15 +77,16 @@ public class Deck
 		// sorts the array into a random order
 		public void shuffle()
 	{
-		// will do this
+		Collections.shuffle(cardDeck);
 	}
 		// returns the card on top of the deck (card at 0 in the array) 
 		// and puts it at the bottom of the deck
 	
 		public Card getCard()
 	{
-		Card retCard = cardDeck.get(0);;
+		Card retCard = cardDeck.get(0);
 		cardDeck.remove(0);
+		cardDeck.add(51, retCard);
 		return retCard;
 	}
 		@Override

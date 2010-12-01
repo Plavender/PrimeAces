@@ -24,7 +24,8 @@ public class Hand {
 	 * @author Steven Honda
 	 */
 	public int addCard(Card newCard){
-		hand[handSize++] = newCard;
+		hand[handSize] = newCard;
+		handSize++;
 		return sortHand();
 	}
 	/**
@@ -32,12 +33,14 @@ public class Hand {
 	 * @return int
 	 * @author Steven Honda
 	 */
-	public int sortHand(){
+	public int sortHand() {
 		int out, in;
-		for(out = handSize - 1; out >= 1; out--){
-			for(in = 0; in < out; in++)
-				if(hand[in].getValue() < hand[in + 1].getValue())
-					swap(in, in + 1);
+		if (handSize < 1) {
+			for (out = handSize - 1; out >= 1; out--) {
+				for (in = 0; in < out; in++)
+					if (hand[in].getValue() < hand[in + 1].getValue())
+						swap(in, in + 1);
+			}
 		}
 		return handSize;
 	}
@@ -47,7 +50,7 @@ public class Hand {
 	 * @param Card two
 	 * @author Steven Honda
 	 */
-	private void swap(int one, int two){
+	public void swap(int one, int two){
 		Card temp = hand[one];
 		hand[one] = hand[two];
 		hand[two] = temp;
@@ -196,5 +199,13 @@ public class Hand {
 		}
 		handDisplay += "\n" + getScore() + "\n";
 		return handDisplay;
+	}
+	public void wipe()
+	{
+		for (int x = 0; x < 2; x++)
+		{
+			hand[x] = null;
+		}
+		handSize = 0;
 	}
 }

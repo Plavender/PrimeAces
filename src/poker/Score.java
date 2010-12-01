@@ -6,7 +6,7 @@ package poker;
  * sorting routine in the pickWinner() method.
  * @author Steven Honda
  */
-public abstract class Score{
+public class Score{
   
 //	public static int playerWin (String[] pCards, String[] cCards, String[] sharedCards){
 //    
@@ -158,12 +158,12 @@ public abstract class Score{
 	 * @param Array of player objects
 	 * @return Winning player
 	 */
-	public static Player pickWinner(){
+	public Player pickWinner(){ // this isn't sorting god damnit
 		//first sort Players by score
 		int out, in;
 		for(out = Player.numPlayers - 1 ; out > 1; out--){
 			for(in = 0; in < out; in++)
-				if(Player.players[in].tiebreaker() < Player.players[in + 1].tiebreaker())
+				if(Player.players[in].getScore() < Player.players[in + 1].getScore())
 					swap(in, in + 1);
 		}
 		return Player.players[0];
@@ -174,7 +174,7 @@ public abstract class Score{
 	 * @param two
 	 * @author Steven Honda
 	 */
-	private static void swap(int one, int two){
+	public void swap(int one, int two){
 		Player temp = Player.players[one];
 		Player.players[one] = Player.players[two];
 		Player.players[two] = temp;
