@@ -7,7 +7,6 @@ import java.util.Random;
  */
 public class Computer extends Player {
 	
-	private int betAmount; 
 	//standard constructor
 	public Computer(int money, String myName, int x, int y) {
 		super(money, myName, x, y);

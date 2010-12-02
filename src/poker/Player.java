@@ -5,7 +5,6 @@ import java.awt.Container;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 //whoever wrote the other portions of this needs to add their comments and an author here.

@@ -90,7 +90,7 @@ public class Dealer {
 		}
 		//  Final declaration of winning or losing
 		if(player[0].getChips() > 0) {
-			JOptionPane.showMessageDialog(null, "You walked away with $" + pot + "!");
+			JOptionPane.showMessageDialog(null, "You walked away with $" + player[0].getChips() + "!");
 		} else {
 			JOptionPane.showMessageDialog(null, "You walked away with... well, the clothes on your back.");
 		}

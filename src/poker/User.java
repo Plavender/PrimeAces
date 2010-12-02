@@ -8,9 +8,7 @@ import javax.swing.JOptionPane;
 
 public class User extends Player {
      
-	 private int betAmount;
- 	
-     public User(int money, String myName, int x, int y) {
+	 public User(int money, String myName, int x, int y) {
 		super(money, myName, x, y);
 		isUser = true;
 	}
@@ -24,6 +22,7 @@ public class User extends Player {
 	 * @return int pBet
 	 */
 
+	@Override
 	public int placeBet() {
 		int	pBet = 0;
 		String bet;
@@ -53,7 +52,7 @@ public class User extends Player {
 		}
 		
 		//Error handling to handle negative numbers or zero dollar bets
-		while (pBet <= 0 || pBet > chips){
+		while (pBet < 0 || pBet > chips){
 			JOptionPane.showMessageDialog(null, "Please enter a valid bet");
 			bet = JOptionPane.showInputDialog(null, "Place your bet");
 			pBet = Integer.parseInt(bet);
