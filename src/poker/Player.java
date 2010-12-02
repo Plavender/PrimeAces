@@ -154,6 +154,7 @@ public class Player {
 	public boolean hasFolded() {
 		return folded;
 	}
+
 }
 
 

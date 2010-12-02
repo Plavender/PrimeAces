@@ -23,7 +23,7 @@ import javax.swing.JPanel;
  *  
  * This version does not contain code as of yet to allow the user to
  * continue playing with their accrued winnings (still in development)
- *
+ *@author Allen
  *@version 1.3
  */
 @SuppressWarnings("serial")

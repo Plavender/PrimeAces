@@ -34,9 +34,9 @@ public class PlayerTest {
 	}
 	@Test
 	public void testPlayer() {
-		Player testPlayer = new Player(7, "Fred");
-		Player testPlayer2 = new Player(6, "Azathoth");
-		Player testPlayer3 = new Player(8, "WHY ME");
+		Player testPlayer = new Player(7, "Fred", 0, 0);
+		Player testPlayer2 = new Player(6, "Azathoth", 0, 0);
+		Player testPlayer3 = new Player(8, "WHY ME", 0, 0);
 		assertEquals("checking chips of player 1", 7, testPlayer.getChips());
 		assertEquals("Checking chips of player 2", 6, testPlayer2.getChips());
 		assertEquals("Checking chips of player 3", 8, testPlayer3.getChips());
@@ -44,17 +44,22 @@ public class PlayerTest {
 
 	@Test
 	public void testGetChips() {
-		fail("Not yet implemented");
+		Player testPlayer = new Player(7, "Fred", 0, 0);
+		assertEquals("Checking players current chips", 7, testPlayer.getChips());
 	}
 
 	@Test
 	public void testAddChips() {
-		fail("Not yet implemented");
+		Player testPlayer = new Player(7, "Fred", 0, 0);
+		testPlayer.addChips(2);
+		assertEquals("Adding 2 chips to the player", 9, testPlayer.getChips());
 	}
 
 	@Test
 	public void testTakeChips() {
-		fail("Not yet implemented");
+		Player testPlayer = new Player(7, "Fred", 0, 0);
+		testPlayer.takeChips(2);
+		assertEquals("Taking 2 chips from the player", 5, testPlayer.getChips());
 	}
 
 	@Test
@@ -90,5 +95,38 @@ public class PlayerTest {
 		assertEquals("Adding Fifth card", 5, testCase.addCard(card5));
 		assertEquals("Adding Sixth card", 6, testCase.addCard(card6));
 		assertEquals("Adding Seventh card", 7, testCase.addCard(card7));
+	}
+	@Test
+	public void testDealIn(){
+		Player testPlayer = new Player(7, "Fred", 0, 0);
+		int cost = 2;
+		assertEquals("Testing this", 2, testPlayer.dealIn(cost, card1, card2));
+	}
+	@Test
+	public void testAddPlayerHand(){
+		Player testPlayer = new Player(7, "Fred", 0, 0);
+		testPlayer.addPlayerHand(card1, 1);
+		assertSame("Testing", card1 , testPlayer.playerHand[0]);
+	}
+	@Test
+	public void testToString(){
+		Player testPlayer = new Player(7, "Fred", 0, 0);
+		assertEquals("Testing the name, should be Fred", "Fred", testPlayer.ToString());
+	}
+	@Test
+	public void testPlaceBet(){
+		Player testPlayer = new Player(7, "Fred", 0, 0);
+		assertEquals("Testing, should be 0", 0, testPlayer.placeBet());
+	}
+	@Test
+	public void testFold(){
+		Player testPlayer = new Player(7, "Fred", 0, 0);
+		testPlayer.fold();
+		assertEquals("Fold should be true", true, testPlayer.hasFolded());
+	}
+	@Test
+	public void testHasFolded(){
+		Player testPlayer = new Player(7, "Fred", 0, 0);
+		assertEquals("Fold should be false", false, testPlayer.hasFolded());
 	}
 }

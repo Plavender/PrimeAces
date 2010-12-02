@@ -204,6 +204,9 @@ public class Hand {
 		handDisplay += "\n" + getScore() + "\n";
 		return handDisplay;
 	}
+	/**
+	 * This method wipes each players hand
+	 */
 	public void wipe()
 	{
 		for (int x = 0; x < 2; x++)

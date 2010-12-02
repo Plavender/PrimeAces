@@ -19,6 +19,11 @@ public class Deck
 	}
 	// creates an array of 52 card objects - standard poker cards 3 parameters 1st string denotes suit
 	// second string tells card number, 3rd perameter is an int for comparing the value of the cards
+	/**
+	 * Sets up card img for gui
+	 * 
+	 */
+
 	public static ImageIcon getImage(String suit) {
 		ImageIcon bkg = cardImg[0];
 		if(suit.equalsIgnoreCase("Spades"))

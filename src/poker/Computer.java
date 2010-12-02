@@ -3,10 +3,11 @@ import java.util.Random;
 
 /**
  * This class will control the computer players betting.
- * @author Ryuu
+ * @author Steven Honda
  */
 public class Computer extends Player {
 	
+	private int betAmount; 
 	//standard constructor
 	public Computer(int money, String myName, int x, int y) {
 		super(money, myName, x, y);
@@ -57,5 +58,5 @@ public class Computer extends Player {
 	public String toString() {
 		return name;
 	}
-	
+
 }
