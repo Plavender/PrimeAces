@@ -23,7 +23,7 @@ public class PlayerTest {
 	
 	@Before
 	public void setUp(){
-		testCase = new Hand();
+		testCase = new Hand(7);
 		card1 = new Card("Heart", "Queen", 11);
 		card2 = new Card("Heart", "Jack", 10);
 		card3 = new Card("Heart", "Ten", 9);
@@ -34,15 +34,12 @@ public class PlayerTest {
 	}
 	@Test
 	public void testPlayer() {
-		Player testPlayer = new Player(7);
-		Player testPlayer2 = new Player(6);
-		Player testPlayer3 = new Player(8);
+		Player testPlayer = new Player(7, "Fred");
+		Player testPlayer2 = new Player(6, "Azathoth");
+		Player testPlayer3 = new Player(8, "WHY ME");
 		assertEquals("checking chips of player 1", 7, testPlayer.getChips());
 		assertEquals("Checking chips of player 2", 6, testPlayer2.getChips());
 		assertEquals("Checking chips of player 3", 8, testPlayer3.getChips());
-		assertSame("Added player 1 to array", Player.players[0], testPlayer);
-		assertSame("Added player 2 to array", Player.players[1], testPlayer2);
-		assertSame("Added player 3 to array", Player.players[2], testPlayer3);
 	}
 
 	@Test

@@ -22,7 +22,7 @@ public class HandTest {
 	
 	@Before
 	public void setUp(){
-		testCase = new Hand();
+		testCase = new Hand(7);
 		card1 = new Card("Heart", "Queen", 11);
 		card2 = new Card("Heart", "Jack", 10);
 		card3 = new Card("Heart", "Ten", 9);
@@ -33,7 +33,7 @@ public class HandTest {
 	}
 	@Test
 	public void testHand() {
-		Hand testHand = new Hand();
+		Hand testHand = new Hand(1);
 		assertEquals("Adding first card", 1, testHand.addCard(card1));
 	}
 
@@ -98,7 +98,7 @@ public class HandTest {
 	@Test
 	public void testToString() {
 		testCase.addCard(card1);
-		assertEquals("Heart Queen\n\n11\n", testCase.toString());
+		assertEquals("Heart Queen[11]\n\n11\n", testCase.toString());
 	}
 
 }

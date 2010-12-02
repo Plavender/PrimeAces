@@ -1,5 +1,13 @@
 package poker;
 
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+
 //whoever wrote the other portions of this needs to add their comments and an author here.
 /**
  * The constructor adds to an array of players for determining the winner of a game.  There are 
@@ -9,20 +17,26 @@ package poker;
  *
  */
 public class Player {
+	private int gridx, gridy;
+	protected boolean isUser = false;
+	protected String name;
+	protected int chips;
+	protected boolean folded;
+	public Hand hand;
+	public Card[] playerHand = new Card[2];
 	
-	protected int chips; 
-	protected Hand hand;
-	Card[] playerHand = new Card[2];
-	public static int numPlayers = 0;
-	static public Player[] players = new Player[4];
-	
-	public Player(int m)
+	public Player(int money, String myName, int x, int y)
 	{
-		players[numPlayers] = this;
-		numPlayers++;
-		hand = new Hand();
+		gridx = x;
+		gridy = y;
+		hand = new Hand(7);
+		if(hand.handSize > 0 || hand.getScore() > 0)
+			name = "Mud";
+		else
+			name = myName;
 //		m = chips;
-		chips = m;  // I am assuming this is what you mean 
+		folded = false;
+		chips = money;  // I am assuming this is what you mean 
 	}
 	public int getChips()
 	{
@@ -34,9 +48,10 @@ public class Player {
 		chips += x;
 	}
 	
-	public void takeChips(int y)
+	public int takeChips(int y)
 	{
 		chips -= y;
+		return y;
 	}
 	/**
 	 * this method is for getting the score of the current poker hands for a player from somewhere 
@@ -52,7 +67,7 @@ public class Player {
 	 * @return double
 	 * @author Steven Honda
 	 */
-	public double tiebreaker(){
+	public double tieBreaker(){
 		return hand.tieBreaker();
 	}
 	/**
@@ -63,17 +78,81 @@ public class Player {
 	public int addCard(Card newCard){
 		return hand.addCard(newCard);
 	}
-	public void scoreWipe(){
+	
+	public int dealIn(int cost, Card card1, Card card2){
+		folded = false;
 		hand.wipe();
-	}
-	public void wipe(){
-		for (int x = 0; x < 2; x++)
+		for (int i = 0; i < 2; i++)
 		{
-			playerHand[x] = null;
+			playerHand[i] = null;
 		}
-	}
+		addPlayerHand(card1, 1);
+		addPlayerHand(card2, 2);
+
+		return takeChips(cost);
+
+}
+	
 	public void addPlayerHand(Card newCard, int i){
 		playerHand[i - 1] = newCard;
+		System.out.println("Added:" + playerHand[i - 1].toString()+ "to playerHand at position " + i);
+		hand.addCard(newCard);
+	}
+	
+	public String ToString()
+	{
+		return name;
+	}
+
+	
+	public void render(Table table) {
+		render(table, isUser);
+	}
+	
+	public void render(Table table, boolean show) {
+		Container GUI = table.GUI;
+		GridBagConstraints coord = table.coord;
+		
+		// TODO Auto-generated method stub
+		//First computer player name label and placement on the board
+		JLabel Comp = new JLabel(this.toString());
+		coord.gridx = gridx;
+		coord.gridy = gridy;
+		Comp.setFont(new Font("sansserif", Font.BOLD, 16));
+		Comp.setForeground(Color.white);
+		GUI.add(Comp, coord);
+		
+		//player's first card; bg shown, actual values with suit hidden
+		coord.gridx = gridx + 1;
+		coord.gridy = gridy;
+		playerHand[0].render(GUI, coord, show);
+
+		//player's second card; bg shown, actual values with suit hidden
+		coord.gridx = gridx + 2;
+		coord.gridy = gridy;
+		playerHand[1].render(GUI, coord, show);
+
+		//player's chips with value; new chip image and fonts
+		JLabel ChipNum = new JLabel("$" + getChips());
+		coord.gridx = gridx + 3;
+		coord.gridy = gridy;
+		ChipNum.setFont(new Font("sansserif", Font.CENTER_BASELINE, 18));
+		ChipNum.setForeground(Color.black);
+		GUI.add(ChipNum, coord);
+		JLabel Chips = new JLabel(Table.chipImg);
+		GUI.add(Chips, coord);
+	}
+	
+	public int placeBet() {
+		return 0;
+	}
+	
+	public void fold() {
+		folded = true;
+	}
+	
+	public boolean hasFolded() {
+		return folded;
 	}
 }
 

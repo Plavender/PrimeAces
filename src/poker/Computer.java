@@ -8,14 +8,15 @@ import java.util.Random;
 public class Computer extends Player {
 	
 	//standard constructor
-	public Computer(int m) {
-		super(m);
+	public Computer(int money, String myName, int x, int y) {
+		super(money, myName, x, y);
 	}
 	/**
 	 * This method will determine the amount of money the computer will bet with a given hand. 
 	 * @return int bet
 	 */
-	public int bet(){
+	@Override
+	public int placeBet(){
 		int bet = 0;
 		int betPercent = 0;
 		int randBet = 0;
@@ -52,5 +53,9 @@ public class Computer extends Player {
 		return bet;
 	}
 	
-
+	@Override
+	public String toString() {
+		return name;
+	}
+	
 }

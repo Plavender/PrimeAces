@@ -25,7 +25,7 @@ public class ScoreTest {
 	
 	@Before
 	public void setUp(){
-		testCase = new Hand();
+		testCase = new Hand(7);
 		card1p1 = new Card("Heart", "Queen", 11);
 		card2p1 = new Card("Heart", "Jack", 10);
 		card3p1 = new Card("Heart", "Ten", 9);
@@ -36,9 +36,10 @@ public class ScoreTest {
 	}
 	@Test
 	public void testPickWinner() {
-		Player player1 = new Player(50);
-		Player player2 = new Player(50);
-		Player player3 = new Player(50);
+		Player player1 = new Player(50, "Cthulhu");
+		Player player2 = new Player(50, "Azathoth");
+		Player player3 = new Player(50, "Qwjibo");
+		Player player4 = new Player(50, "Ummmmmmm");
 		Card card1p2 = new Card("Diamond", "Seven", 6);
 		Card card2p2 = new Card("Heart", "Nine", 8);
 		Card card3p2 = new Card("Diamond", "Queen", 11);
@@ -53,20 +54,27 @@ public class ScoreTest {
 		Card card5p3 = new Card("Heart", "Three", 2);
 		Card card6p3 = new Card("Heart", "Ten", 9);
 		Card card7p3 = new Card("Spade", "Seven", 6);
-		player1.addCard(card1p1);
-		player1.addCard(card2p1);
-		player1.addCard(card3p1);
-		player1.addCard(card4p1);
-		player1.addCard(card5p1);
-		player1.addCard(card6p1);
-		player1.addCard(card7p1);
-		player2.addCard(card1p2);
-		player2.addCard(card2p2);
-		player2.addCard(card3p2);
-		player2.addCard(card4p2);
-		player2.addCard(card5p2);
-		player2.addCard(card6p2);
-		player2.addCard(card7p2);
+		Card card1p4 = new Card("Club", "Two", 1);
+		Card card2p4 = new Card("Diamond", "Six", 5);
+		Card card3p4 = new Card("Spade", "Jack", 10);
+		Card card4p4 = new Card("Heart", "Three", 2);
+		Card card5p4 = new Card("Spade", "Three", 2);
+		Card card6p4 = new Card("Heart", "Ten", 9);
+		Card card7p4 = new Card("Spade", "Seven", 6);
+		player2.addCard(card1p1);
+		player2.addCard(card2p1);
+		player2.addCard(card3p1);
+		player2.addCard(card4p1);
+		player2.addCard(card5p1);
+		player2.addCard(card6p1);
+		player2.addCard(card7p1);
+		player1.addCard(card1p2);
+		player1.addCard(card2p2);
+		player1.addCard(card3p2);
+		player1.addCard(card4p2);
+		player1.addCard(card5p2);
+		player1.addCard(card6p2);
+		player1.addCard(card7p2);
 		player3.addCard(card1p3);
 		player3.addCard(card2p3);
 		player3.addCard(card3p3);
@@ -74,7 +82,14 @@ public class ScoreTest {
 		player3.addCard(card5p3);
 		player3.addCard(card6p3);
 		player3.addCard(card7p3);
-		assertSame("Winner should be player 1", player1, Score.pickWinner());
+		player4.addCard(card1p4);
+		player4.addCard(card2p4);
+		player4.addCard(card3p4);
+		player4.addCard(card4p4);
+		player4.addCard(card5p4);
+		player4.addCard(card6p4);
+		player4.addCard(card7p4);
+		assertSame("Winner should be player 2 with " + "\n" + player2.hand.toString() + "\nWinner was actually " + Score.pickWinner().hand.toString(), player2, Score.pickWinner());
 	}
 
 	@Test

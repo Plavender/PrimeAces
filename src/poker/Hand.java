@@ -8,14 +8,17 @@ package poker;
  * @author Steven Honda
  */  
 public class Hand {
-	static public Card[] hand;
+	public Card[] hand;
 	protected int handSize = 0;
 	/**
 	 * creates the ArrayList of card objects that make up a hand. 
 	 * @author Steven Honda
 	 */
-	public Hand(){
-		hand = new Card[7];
+	public Hand(int maxHandSize){
+		hand = new Card[maxHandSize];
+		for(int i = 0; i < maxHandSize; i++)
+			hand[i] = null;
+		handSize = 0;
 	}
 	/**
 	 * This method adds a new card to the uninitialized array of card objects that make up a hand.
@@ -25,6 +28,7 @@ public class Hand {
 	 */
 	public int addCard(Card newCard){
 		hand[handSize] = newCard;
+		System.out.println("Added:" + hand[handSize].toString()+ "to hand at index " + handSize);
 		handSize++;
 		return sortHand();
 	}
@@ -35,13 +39,13 @@ public class Hand {
 	 */
 	public int sortHand() {
 		int out, in;
-		if (handSize < 1) {
-			for (out = handSize - 1; out >= 1; out--) {
-				for (in = 0; in < out; in++)
-					if (hand[in].getValue() < hand[in + 1].getValue())
-						swap(in, in + 1);
-			}
+		System.out.println("Sorting " + handSize + "cards:\n" + this.toString());
+		for (out = handSize - 1; out >= 1; out--) {
+			for (in = 0; in < out; in++)
+				if (hand[in].getValue() < hand[in + 1].getValue())
+					swap(in, in + 1);
 		}
+		System.out.println("Sorted to:\n" + this.toString());
 		return handSize;
 	}
 	/**
@@ -71,19 +75,19 @@ public class Hand {
 		} 
 		else {
 			for (int i = 0; i < handSize; i++) {
-				if (hand[i].getSuit().equalsIgnoreCase("Club")) {
+				if (hand[i].getSuit().equalsIgnoreCase("Clubs")) {
 					flushC++;
 					if (flushC > 4)
 						isFlush = true;
-				} else if (hand[i].getSuit().equalsIgnoreCase("Diamond")) {
+				} else if (hand[i].getSuit().equalsIgnoreCase("Diamonds")) {
 					flushD++;
 					if (flushD > 4)
 						isFlush = true;
-				} else if (hand[i].getSuit().equalsIgnoreCase("Heart")) {
+				} else if (hand[i].getSuit().equalsIgnoreCase("Hearts")) {
 					flushH++;
 					if (flushH > 4)
 						isFlush = true;
-				} else if (hand[i].getSuit().equalsIgnoreCase("Spade")) {
+				} else if (hand[i].getSuit().equalsIgnoreCase("Spades")) {
 					flushS++;
 					if (flushS > 4)
 						isFlush = true;

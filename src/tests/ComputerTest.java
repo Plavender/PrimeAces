@@ -5,7 +5,6 @@ import org.junit.Test;
 
 import poker.Card;
 import poker.Computer;
-import poker.Player;
 
 
 public class ComputerTest {
@@ -21,15 +20,12 @@ public class ComputerTest {
 	
 	@Test
 	public void testComputer() {
-		Computer testPlayer = new Computer(7);
-		Computer testPlayer2 = new Computer(6);
-		Computer testPlayer3 = new Computer(8);
+		Computer testPlayer = new Computer(7, "Bob");
+		Computer testPlayer2 = new Computer(6, "Fred");
+		Computer testPlayer3 = new Computer(8, "Cthulhu");
 		assertEquals("checking chips of player 1", 7, testPlayer.getChips());
 		assertEquals("Checking chips of player 2", 6, testPlayer2.getChips());
 		assertEquals("Checking chips of player 3", 8, testPlayer3.getChips());
-		assertSame("Added player 1 to array", Player.players[0], testPlayer);
-		assertSame("Added player 2 to array", Player.players[1], testPlayer2);
-		assertSame("Added player 3 to array", Player.players[2], testPlayer3);
 	}
 
 	@Test
@@ -41,7 +37,7 @@ public class ComputerTest {
 		card5 = new Card("Heart", "King", 12);
 		card6 = new Card("Heart", "Nine", 8);
 		card7 = new Card("Heart", "Ace", 13);
-		testCase = new Computer(100);
+		testCase = new Computer(100, "Bob");
 		testCase.addCard(card1);
 		testCase.addCard(card2);
 		testCase.addCard(card3);
@@ -49,7 +45,7 @@ public class ComputerTest {
 		testCase.addCard(card5);
 		testCase.addCard(card6);
 		testCase.addCard(card7);
-		assertEquals("This should give the range of betting", 77 ,testCase.bet(), 16);
+		assertEquals("This should give the range of betting", 77 ,testCase.placeBet(), 16);
 	}
 
 }

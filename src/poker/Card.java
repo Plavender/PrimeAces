@@ -2,6 +2,13 @@ package poker;
 /*
  * 
  */
+
+import java.awt.Container;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+
+import javax.swing.JLabel;
+
 public class Card
 {
 	protected String name = new String();
@@ -36,8 +43,25 @@ public class Card
 	@Override
 	public String toString()
 	{
-		String suitName = new String(suit + " " + name);
+		String suitName = new String(suit + " " + name + "[" + value + "]");
 		return suitName;		
+	}
+	
+	public void render(Container GUI, GridBagConstraints coord, boolean showFace)
+	{
+		if(showFace) {
+			JLabel CardText = new JLabel(this.name);
+			CardText.setFont(new Font("sansserif", Font.BOLD, 84));
+			GUI.add(CardText, coord);
+			JLabel CardFace = new JLabel(Deck.getImage(this.suit));
+			GUI.add(CardFace, coord);
+		} else {
+			JLabel CardBack = new JLabel(Deck.cardImg[0]);
+			GUI.add(CardBack, coord);
+			CardBack.setVisible(true);
+		}
+		
+	
 	}
 		
 }
