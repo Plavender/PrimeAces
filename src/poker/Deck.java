@@ -46,11 +46,11 @@ public class Deck
 		suitName[3] = "Clubs";
 		suitName[4] = "Diamonds";
 
-		cardImg[0] = new ImageIcon("cardback.jpg");
-		cardImg[1] = new ImageIcon("spades.jpg");
-		cardImg[2] = new ImageIcon("hearts.jpg");
-		cardImg[3] = new ImageIcon("clubs.jpg");
-		cardImg[4] = new ImageIcon("diamonds.jpg");
+		cardImg[0] = new ImageIcon("images/cardback.jpg");
+		cardImg[1] = new ImageIcon("images/spades.jpg");
+		cardImg[2] = new ImageIcon("images/hearts.jpg");
+		cardImg[3] = new ImageIcon("images/clubs.jpg");
+		cardImg[4] = new ImageIcon("images/diamonds.jpg");
 		
 		String[] numbers = new String[14];  
 		numbers[0] = "";

@@ -28,9 +28,9 @@ public class Table extends JPanel {
 	public Container GUI = null;
 	public GridBagConstraints coord = null;
 	//Images for play area- new chip image
-	public static ImageIcon chipImg = new ImageIcon("chip2.jpg");
+	public static ImageIcon chipImg = new ImageIcon("images/chip2.jpg");
 	//New code to fill in background for middle table empty spaces
-	public static ImageIcon background = new ImageIcon("bg.jpg");
+	public static ImageIcon background = new ImageIcon("images/bg.jpg");
 
 	// array of cards for play area maximum of 5 
 	Card[] cards = new Card[5];
